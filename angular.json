@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "event-library": {
+    "event-library-poc": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/event-library",
+            "outputPath": "dist/event-library-poc",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,9 +27,11 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/izitoast/dist/css/iziToast.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["src/assets/libs/iziToast/iziToast.min.js"]
           },
           "configurations": {
             "production": {
@@ -68,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "event-library:build:production"
+              "browserTarget": "event-library-poc:build:production"
             },
             "development": {
-              "browserTarget": "event-library:build:development"
+              "browserTarget": "event-library-poc:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "event-library:build"
+            "browserTarget": "event-library-poc:build"
           }
         },
         "test": {
@@ -90,17 +92,40 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
+              { 
+              "glob": "**/*",
+              "input": "./node_modules/ngtek-event-library/assets/",
+              "output": "/assets/"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "src/styles.css",
+              "./node_modules/ngtek-event-library/assets/styles/styles.scss",                         "node_modules/izitoast/dist/css/iziToast.min.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/izitoast/dist/css/iziToast.min.css",
+              "node_modules/@project-sunbird/sb-styles/assets/_styles.scss",
+              "src/assets/lib/semantic/semantic.min.css",
+              "src/assets/styles/styles.scss",
+              "node_modules/katex/dist/katex.min.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/izitoast/dist/js/iziToast.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/katex/dist/katex.min.js",
+              "src/assets/lib/dimmer.min.js",
+              "src/assets/lib/transition.min.js",
+              "src/assets/lib/modal.min.js"
+
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "event-library"
+  "defaultProject": "event-library-poc"
 }
