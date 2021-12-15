@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { EventCreateService, EventDetailService } from 'ngtek-event-library';
 import { EventService } from '..';
-import { createForm, eventList } from '../mock-data';
+import { createEventForm, createForm, eventList } from '../mock-data';
 
 @Component({
   selector: 'app-user-fom',
@@ -14,11 +14,26 @@ export class UserFomComponent implements OnInit {
   eventItem : any;
   userId : string = "999";
   formFieldProperties: any;
+  libEventConfig = {
+    context: {
+    user: 'abc',
+    identifier: '123',
+    channel: 'sunbird',
+    authToken: '',
+    sid: 'abc124',
+    uid: '1001',
+    id: '1234',
+    additionalCategories: 'additionalCategories',
+    },
+    config: {
+    mode: 'create'
+    }
+    };
 
   constructor(private eventService: EventService,
     private eventDetailService: EventDetailService ,
     private router: Router) { 
-
+      this.formFieldProperties = createForm.result['form'].data.fields
     }
 
   ngOnInit() {
@@ -28,7 +43,8 @@ export class UserFomComponent implements OnInit {
 
   showEventCreatePage() {
     this.eventService.getCreateEventForm().subscribe((data: any) => {
-      this.formFieldProperties = data.result['form'].data.fields
+      this.formFieldProperties = createForm.result['form'].data.fields
+      console.log(this.formFieldProperties)
     })
   }
   

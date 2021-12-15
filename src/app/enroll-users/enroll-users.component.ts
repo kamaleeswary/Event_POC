@@ -101,7 +101,7 @@ export class EnrollUsersComponent implements OnInit {
 
     if(view == 'list' )
     {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/demo']);
     }
     else if(view == 'detail')
     {
@@ -119,7 +119,7 @@ export class EnrollUsersComponent implements OnInit {
     {
       this.router.navigate(['/form'], {
         queryParams: {
-          identifier: '871ac12e-2170-4c6c-a07d-e933c1f64259'
+          // identifier: '871ac12e-2170-4c6c-a07d-e933c1f64259'
         }
       });
     }

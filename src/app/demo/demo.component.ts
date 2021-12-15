@@ -10,8 +10,11 @@ import {
   CalendarEventTitleFormatter,
 } from 'angular-calendar';
 import { EventCreateService, EventDetailService, EventListService, SbToastService } from 'ngtek-event-library';
-import { createEventForm, eventDetailData, eventList, filterData } from './mock-data';
-import { EventService } from './services/event.service';
+import { MyCalendarEvent } from '../app.component';
+import { EventServiceService } from '../services/event-service.service';
+import { createEventForm, eventDetailData, eventList, filterData, myEventsList } from '../mock-data';
+import { EventService } from '..';
+
 export const colors: any = {
   red: {
     primary: '#ad2121',
@@ -26,53 +29,13 @@ export const colors: any = {
     secondary: '#FAE3E3',
   },
 };
-
-export interface MyCalendarEvent extends CalendarEvent {
-  venue?: {
-    name?: string;
-  };
-  code?: string;
-  registrationStartDate?: string;
-  keywords?: [];
-
-  description?: string;
-  language?: [];
-  source?: string;
-  createdOn?: string;
-  objectType?: string;
-  registrationEndDate?: string;
-  lastUpdatedOn?: string;
-  starttime?: string;
-  contentType?: string;
-  trackable?: {
-    enabled?: string;
-    autoBatch?: string;
-  };
-  onlineProviderData?: {
-    meetingLink?: string;
-  };
-  identifier?: string;
-  lastStatusChangedOn?: string;
-  createdFor?: [];
-  audience?: [];
-  visibility?: string;
-  consumerId?: string;
-  eventType?: string;
-  languageCode?: [];
-  version?: number;
-  versionKey?: string;
-  leafNodesCount?: number;
-  endTime?: string;
-  status?: string;
-  owner?: string;
-}
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-demo",
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: "./demo.component.html",
+  styleUrls: ["./demo.component.scss"],
 })
-export class AppComponent implements OnInit {
+export class DemoComponent implements OnInit {
   colors = colors;
   filterConfig: any;
   isDetail = true;
@@ -116,18 +79,16 @@ export class AppComponent implements OnInit {
     };
   
     
-
   constructor(
     private eventService: EventService,
-    private eventCreateService: EventCreateService,
-    private eventDetailService: EventDetailService,
     private router: Router,
-    private sbToastService: SbToastService) { }
+   ) { }
     ngOnInit() {
       this.showEventListPage();
       this.showEventCreatePage();
       this.showFilters();
       this.showCalenderEvent();
+      this.myEvents = myEventsList.result.Event;
     }
   
      /* For get List of events
@@ -140,7 +101,7 @@ export class AppComponent implements OnInit {
         };
         
         this.eventService.getEventList().subscribe((data: any) => {
-          this.eventList = data.result.content;
+          this.eventList = eventList.result.content;
           this.isLoading = false;
         });
     }
@@ -178,6 +139,7 @@ export class AppComponent implements OnInit {
       }
       else 
       {
+        this.tab = 'form';
         this.router.navigate(['/form'], {
           queryParams: {
             // identifier: event.identifier
@@ -189,12 +151,9 @@ export class AppComponent implements OnInit {
     }
   
     showEventCreatePage() {
-      // this.eventCreateService.getEventFormConfig().subscribe((data: any) => {
-        this.formFieldProperties = createEventForm.result["form"].data.fields;
-        this.isLoading = false;
-  
-        // console.log(data.result["form"].data.fields);
-      // });
+      this.eventService.getCreateEventForm().subscribe((data: any) => {
+        this.formFieldProperties = data.result['form'].data.fields
+      })
     }
   
     cancel(event: any) {

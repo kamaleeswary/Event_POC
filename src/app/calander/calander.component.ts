@@ -132,7 +132,7 @@ export class CalanderComponent implements OnInit {
 
     // Loader code
     this.tab == 'list' ? this.isLoading = true : this.isLoading = false;
-    this.eventList = this.eventList.filter((e: any) => e.eventType.toLowerCase().includes(this.Filterdata.eventType.toLocaleLowerCase()));
+    // this.eventList = this.eventList.filter((e: any) => e.eventType.toLowerCase().includes(this.Filterdata.eventType.toLocaleLowerCase()));
 
     // this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
     //   if (data.responseCode == 'OK') {
