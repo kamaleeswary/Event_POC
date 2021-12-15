@@ -12,6 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { EnrollUsersComponent } from './enroll-users/enroll-users.component';
 import { UserFomComponent } from './user-fom/user-fom.component';
 import { CalanderComponent } from './calander/calander.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { DetailRedirectionComponent } from './detail-redirection/detail-redirection.component';
+import { DemoComponent } from './demo/demo.component';
 
 
 
@@ -20,7 +24,11 @@ import { CalanderComponent } from './calander/calander.component';
     AppComponent,
     EnrollUsersComponent,
     UserFomComponent,
-    CalanderComponent
+    CalanderComponent,
+    UserListComponent,
+    UserDetailComponent,
+    DetailRedirectionComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,
